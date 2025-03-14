@@ -120,4 +120,21 @@ router.get('/leaderboard', async (req: Request, res: Response) => {
     }
 });
 
+router.get('/counter', async (req,res) => {
+	try{
+        const count = await Transaction.countDocuments() 
+        res.status(200).json({
+            message: 'Counter fetched successfully',
+            data: count
+        });
+    } catch (error) {
+        console.error("Error fetching counter:", error);
+        res.status(500).json({
+            message: 'Failed to fetch counter',
+            error: error || '',
+        });
+    }
+})
+
+
 export default router;
